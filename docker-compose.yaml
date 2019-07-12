@@ -1,0 +1,7 @@
+version: '3'
+services:
+  dot:
+    build: .
+    volumes:
+      - ${HOME}:${HOME}
+    command: sleep infinity
