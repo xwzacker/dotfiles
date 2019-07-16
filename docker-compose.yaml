@@ -1,7 +1,15 @@
 version: '3'
 services:
   dot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    user: $UID:$GID
+    working_dir: $HOME
     volumes:
       - ${HOME}:${HOME}
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/sudoers:/etc/sudoers:ro
     command: sleep infinity
