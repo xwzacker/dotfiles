@@ -1,5 +1,67 @@
 FROM ubuntu:18.04
 
+# Locales
+# ENV LANGUAGE=zh_TW.UTF-8
+# ENV LANG=zh_TW.UTF-8
+# RUN apt-get update && apt-get install -y locales && locale-gen zh_TW.UTF-8
+ENV LANGUAGE=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
+
+# Colors and italics for tmux
+#COPY xterm-256color-italic.terminfo /root
+#RUN tic /root/xterm-256color-italic.terminfo
+#ENV TERM=xterm-256color-italic
+
 RUN apt-get update
 RUN apt-get install sudo
 
+RUN apt-get install -y build-essential
+
+RUN apt-get install -y curl git
+RUN apt-get install -y zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+RUN apt-get install -y tmux
+
+# Common packages
+#RUN apt-get update && apt-get install -y \
+#      build-essential \
+#      curl \
+#      git  \
+#      iputils-ping \
+#      jq \
+#      libncurses5-dev \
+#      libevent-dev \
+#      net-tools \
+#      netcat-openbsd \
+#      rubygems \
+#      ruby-dev \
+#      silversearcher-ag \
+#      socat \
+#      software-properties-common \
+#      tmux \
+#      tzdata \
+#      wget \
+#      zsh
+#RUN chsh -s /usr/bin/zsh
+
+RUN apt-get install -y neovim
+
+ARG HOME
+ARG UNAME
+ARG GNAME
+ARG UID
+ARG GID
+RUN echo $HOME
+RUN echo $UNAME
+RUN echo $GNAME
+RUN echo $UID
+RUN echo $GID
+
+RUN if [ ${UID:-0} -ne 0 ] && [ ${UNAME:-0} -ne 0 ] && [ $(getent passwd ${UID}:-0) -ne 0 ]; then \
+      userdel -f ${UNAME} \
+    ;fi
+
+COPY zshrc $HOME/.zshrc
+# USER ${UID}:${GID} # change user while building image
