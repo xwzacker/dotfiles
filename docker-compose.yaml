@@ -4,12 +4,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ubuntu
-    user: $UID:$GID
-    working_dir: $HOME
+      args:
+        HOME: ${HOME}
+        UNAME: ${UNAME}
+        GNAME: ${GNAME}
+        UID: ${UID}
+        GID: ${GID}
+    #user: ${UID}:${GID}
+    working_dir: /home/${USER}
     volumes:
-      - ${HOME}:${HOME}
-      - /etc/group:/etc/group:ro
-      - /etc/passwd:/etc/passwd:ro
-      - /etc/shadow:/etc/shadow:ro
-      - /etc/sudoers:/etc/sudoers:ro
+      - ${HOME}:/home/${USER}
+      #- /etc/group:/etc/group:ro
+      #- /etc/passwd:/etc/passwd:ro
+      #- /etc/shadow:/etc/shadow:ro
+      #- /etc/sudoers:/etc/sudoers:ro
     command: sleep infinity
