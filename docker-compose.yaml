@@ -10,10 +10,10 @@ services:
         GNAME: ${GNAME}
         UID: ${UID}
         GID: ${GID}
-    #user: ${UID}:${GID}
-    working_dir: /home/${USER}
+    user: ${UID}:${GID}
+    working_dir: /home/${UNAME}
     volumes:
-      - ${HOME}:/home/${USER}
+      - ${HOME}:/home/${UNAME}
       #- /etc/group:/etc/group:ro
       #- /etc/passwd:/etc/passwd:ro
       #- /etc/shadow:/etc/shadow:ro
