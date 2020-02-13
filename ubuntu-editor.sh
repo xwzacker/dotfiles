@@ -1,7 +1,7 @@
 # UID = $(id -u)
 # export UID
 
-#export UID=$(id -u) # in office VM, UID is read-only
+export UID=$(id -u) # in office VM, UID is read-only
 export GID=$(id -g)
 export UNAME=$(whoami)
 export GNAME=$(getent group $(id -g) | cut -d: -f1)
