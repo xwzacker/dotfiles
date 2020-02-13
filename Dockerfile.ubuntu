@@ -48,6 +48,7 @@ RUN apt-get install -y tmux
 
 RUN apt-get install -y neovim
 
+#RUN echo "fyk"
 ARG HOME
 ARG UNAME
 ARG GNAME
@@ -59,8 +60,23 @@ RUN echo $GNAME
 RUN echo $UID
 RUN echo $GID
 
-RUN if [ ${UID:-0} -ne 0 ] && [ ${UNAME:-0} -ne 0 ] && [ $(getent passwd ${UID}:-0) -ne 0 ]; then \
-      userdel -f ${UNAME} \
+# create group if $GID doesn't exist
+RUN if [ ${GID:-0} -ne 0 ]; then \
+      if [ $(getent group ${GID} > /dev/null 2>&1; echo $?) -ne 0 ]; then \
+        groupadd -g ${GID} dockerEditorsGroup \
+      ;fi \
+    ;else \
+      echo "cannot get Group id from arguments" \
+    ;fi
+
+RUN if [ ${UID:-0} -ne 0 ]; then \
+      if [ $(getent passwd ${UID} > /dev/null 2>&1; echo $?) -ne 0 ]; then \
+        useradd -l -u ${UID} -g ${GID} ${UNAME} \
+      ;else \
+        echo "user exists, are you using a special user ?"; exit 1 \
+      ;fi \
+    ;else \
+      echo "cannot get User id or name from arguments" \
     ;fi
 
 COPY zshrc $HOME/.zshrc
