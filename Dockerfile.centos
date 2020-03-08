@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM centos:centos7.7.1908
 
 # Locales
 # ENV LANGUAGE=zh_TW.UTF-8

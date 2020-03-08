@@ -6,11 +6,11 @@ services:
       dockerfile: Dockerfile.centos
       args:
         HOME: ${HOME}
-        UNAME: ${UNAME}
-        GNAME: ${GNAME}
-        UID: ${UID}
-        GID: ${GID}
-    user: ${UID}:${GID}
+        USER_NAME: ${USER_NAME}
+        GROUP_NAME: ${GROUP_NAME}
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+    user: ${USER_ID}:${GROUP_ID}
     working_dir: /home/${UNAME}/workspace
     volumes:
       - ${HOME}/workspace:/home/${UNAME}/workspace
