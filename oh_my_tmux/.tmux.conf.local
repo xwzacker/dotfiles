@@ -465,16 +465,26 @@ tmux_conf_uninstall_plugins_on_reload=true
 unbind _
 bind | split-window -h
 
+# buffers
+
+# only use <prefix> + enter to enter copy mode
+unbind [
+
+# only use <prefix> + p to paste recent buffer
+unbind ]
+
 # buffers, just use choose-buffer
 # if only want to list-buffer, use choose-buffer and esc to get ont
-# if only want to paste-buffer -p (paste top buffer), enable the OS clipboard feature above, and just use the OS paste command
+# (deprecated, because maybe not all OS can enable clipboard) if only want to paste-buffer -p (paste top buffer), enable the OS clipboard feature above, and just use the OS paste command
 unbind b
-unbind p
 unbind P
 bind b choose-buffer
 
 # windows
 unbind c
-bind C-n new-window
+bind C-t new-window
 bind C-w confirm-before -p "kill this window ? (y/n)" kill-window
 
+# session
+unbind C-c
+bind C-n new-session
