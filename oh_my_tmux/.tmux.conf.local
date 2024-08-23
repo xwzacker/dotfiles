@@ -488,3 +488,4 @@ bind C-w confirm-before -p "kill this window ? (y/n)" kill-window
 # session
 unbind C-c
 bind C-n new-session
+set-option -g detach-on-destroy off
