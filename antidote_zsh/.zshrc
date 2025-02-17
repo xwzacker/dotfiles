@@ -23,3 +23,6 @@ antidote load
 # other settings
 # For oh-my-tmux copy-paste mode
 export EDITOR="vim"
+
+# Disable auto cd
+unsetopt autocd
