@@ -7,7 +7,7 @@ https://github.com/gpakosz/.tmux?tab=readme-ov-file#installation
 
 ## Config
 
-* do all config in `~/.tmux.config.local`
+* do all config in `~/.config/tmux/tmux.config.local`
 * my config
   * study original `.tmux.config.local`, and make C-q the prefix key
   * unbind C-b & C-a to make C-q the only prefix key
