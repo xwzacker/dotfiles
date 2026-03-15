@@ -12,12 +12,26 @@
 
 * theme: everblush
 
-* theme: everblush
-luasnip: we can build some snippets, and load them by luasnip, to complete complex operation in one click ???
+* luasnip: we can build some snippets, and load them by luasnip, to complete complex operation in one click ???
 plugins config
 
     https://nvchad.com/docs/config/plugins
     override plugin options in custom/plugins.lua
+
+* Todo: personal key mapping to try
+```lua
+local map = vim.keymap.set
+
+-- let c key be d key , means cut
+map({'n', 'x'}, 'c', 'd')
+map('n', 'cc', 'dd')
+map('n', 'C', 'D')
+
+-- d key to normal deletion, by sending deleted content to black hole register ("_)
+map({'n', 'x'}, 'd', '"_d')
+map('n', 'dd', '"_dd')
+map('n', 'D', '"_D')
+```
 
 syntax highlighting
 
